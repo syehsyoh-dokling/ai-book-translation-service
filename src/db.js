@@ -17,11 +17,10 @@ const DB_PATH = process.env.DB_PATH || "./data/books.db";
 fs.mkdirSync(path.dirname(DB_PATH), { recursive: true });
 
 // Gunakan node-sqlite3-wasm (pure WASM, tidak perlu build native)
-const { DatabaseSync } = require("node:sqlite");   // Node 22.5+ built-in sqlite!
-
 let db;
 try {
   // Node 22 punya built-in sqlite — coba dulu
+  const { DatabaseSync } = require("node:sqlite");   // Node 22.5+ built-in sqlite!
   db = new DatabaseSync(DB_PATH);
   console.log("✅ SQLite (Node built-in) connected:", DB_PATH);
 } catch (e) {
